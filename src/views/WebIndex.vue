@@ -1,26 +1,38 @@
 <template>
   <div class="webindex">
     <div class="title">ChatGPT导航页</div>
-    <div class="desc">下方列表内网站有时可能会更换网址，但本导航页不变，收藏本站不迷路！<br />本网站：<strong>yzre.cn</strong> —助记：<strong>伊泽瑞尔.</strong>cn</div>
+    <div class="desc">本页是永久导航页，以后会逐渐增加更多功能，收藏本站不迷路！<br />本网站：<strong>yzre.cn</strong> —助记：<strong>伊泽瑞尔.</strong>cn</div>
     <div class="list_title">ChatGPT国内站列表</div>
+    <div class="text">点击密码可将其复制到剪切板</div>
     <div class="list">
-      <div class="item" v-for="(item,ind) in webList" :key="ind">
+      <div class="item"
+           v-for="(item,ind) in webList"
+           :key="ind">
         <div class="item-content">
           <div class="website-name">{{ item.webName }}</div>
           <div class="website-details">
-            <div class="website-link" @click="toPage(item.url)">{{ item.url }}</div>
-            <div class="website-password">{{ item.password }}</div>
+            <div class="website-link"
+                 @click="toPage(item.url)">{{ item.url }}</div>
+            <div class="website-password"
+                 @click="Copy(item.password, `已将访问密码【${item.password}】复制到剪切板`)">访问密码：{{ item.password }}<i class="iconfont icon-fuzhi"></i></div>
           </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-content">
+          <div class="website-name">欢迎各位联系站长补充...</div>
         </div>
       </div>
     </div>
     <div class="footer">
       <div>如需在本页添加自己的网站、或者想部署自己的GPT镜像站、或者有其他建议/想法，请联系本站站长</div>
-      <div>站长微信：keke_nobug</div>
+      <div @click="Copy('keke_nobug','微信号已复制到剪切板')">站长微信：<strong>keke_nobug</strong>(点此即可复制微信号)</div>
+      <div style="color: red;">如果发现不能用了，可及时联系站长处理</div>
       <div style="font-size: .7rem;">注：加好友请注明来源和来意，请发文字消息，勿弹语音电话。</div>
     </div>
     <div class="copy">
-      <a href="https://beian.miit.gov.cn/" target="_blank">豫ICP备2023005087号-1</a><br>
+      <a href="https://beian.miit.gov.cn/"
+         target="_blank">豫ICP备2023005087号-1</a><br>
       <span>Copyright ©2023 Jiege.</span>
       <span>All Rights Reserved.</span>
     </div>
@@ -34,10 +46,10 @@ export default {
   data () {
     return {
       webList: [
-        { webName: '网站1', url: 'chat.yzre.cn', password: '访问密码：jiege666' },
-        { webName: '网站2', url: 'jiege.yzre.cn', password: '访问密码：jiege666' },
-        { webName: '欢迎各位补充！' },
-        { webName: '敬请期待...' },
+        { webName: '①', url: 'chat.yzre.cn', password: 'jiege666' },
+        { webName: '②', url: 'jiege.yzre.cn', password: 'jiege666' },
+        { webName: '③', url: 'chat.cxyj.xyz', password: 'CXYJ' },
+
       ]
     };
   },
@@ -51,6 +63,17 @@ export default {
       let path = window.location.protocol + '//' + url;
       window.open(path, '_blank');
     },
+    // 置剪切板
+    Copy (val, msg) {
+      var input = document.createElement('input');     //创建input元素
+      input.value = val;
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand("Copy");     //复制
+      document.body.removeChild(input); // 删除临时实例
+      alert(msg)
+    }
+
   },
 };
 </script>
@@ -81,10 +104,14 @@ export default {
   .list_title {
     font-size: 1.5rem;
     font-weight: bold;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     color: #007bff;
   }
-
+  .text {
+    text-align: right;
+    color: #06d2e0;
+    font-size: 0.8rem;
+  }
   .list {
     .item {
       display: flex;
@@ -105,7 +132,7 @@ export default {
         flex: none;
         font-size: 1.2rem;
         font-weight: bold;
-        margin-right: 1rem;
+        margin-right: 0.5rem;
         color: #333;
       }
 
@@ -118,7 +145,7 @@ export default {
         font-size: 1.2rem;
         color: #007bff;
         cursor: pointer;
-        margin-right: 1rem;
+        margin-right: 0.4rem;
 
         &:hover {
           text-decoration: underline;
@@ -126,7 +153,7 @@ export default {
       }
 
       .website-password {
-        font-size: 1.2rem;
+        font-size: 1rem;
         color: #666;
       }
     }

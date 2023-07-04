@@ -1,0 +1,16 @@
+{
+  "id": "4151717",
+  "name": "webindex",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "5286710",
+      "name": "复制",
+      "font_class": "fuzhi",
+      "unicode": "e63d",
+      "unicode_decimal": 58941
+    }
+  ]
+}
